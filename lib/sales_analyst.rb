@@ -59,7 +59,7 @@ class SalesAnalyst
   def sum_of_of_item_price(id)
     items_with_same_merchant = @items_path.find_all_by_merchant_id(id)
     items_with_same_merchant.sum do |item|
-      item.unit_price
+      item.unit_price.to_i
     end
   end
 
