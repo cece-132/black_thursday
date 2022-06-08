@@ -17,7 +17,7 @@ class InvoiceRepository
             :id => row[:id].to_i,
             :customer_id => row[:customer_id].to_i,
             :merchant_id => row[:merchant_id].to_i,
-            :status => row[:status],
+            :status => row[:status].to_sym,
             :created_at => row[:created_at],
             :updated_at => row[:updated_at]})
           end
@@ -56,7 +56,7 @@ class InvoiceRepository
       :id => new_id,
       :customer_id => attributes[:customer_id].to_i,
       :merchant_id => attributes[:merchant_id].to_i,
-      :status => attributes[:status].to_s,
+      :status => attributes[:status].to_sym,
       :created_at => attributes[:created_at],
       :updated_at => attributes[:updated_at]
       })
@@ -65,9 +65,8 @@ class InvoiceRepository
   def update(id, attributes)
     invoice = find_by_id(id)
     if attributes[:status] == "shipped".downcase  || "pending".downcase || "returned".downcase
-      invoice.status = attributes[:status]
+      invoice.status = attributes[:status].to_sym
     end
-
   end
 
   def inspect

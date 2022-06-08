@@ -10,7 +10,9 @@ RSpec.describe SalesAnalyst do
     @sales_engine = SalesEngine.from_csv({
       :items => './data/items.csv',
       :merchants => './data/merchants.csv',
-      :invoices => './data/invoices.csv'
+      :invoices => './data/invoices.csv',
+      :transactions => './data/transactions.csv',
+      :invoice_items => './data/invoice_items.csv'
     })
     @sales_analyst = @sales_engine.analyst
   end
@@ -73,5 +75,54 @@ RSpec.describe SalesAnalyst do
 
     expect(@sales_analyst.golden_items).to be_a Array
     expect(@sales_analyst.golden_items.first).to be_a Item
+  end
+
+  it 'can find the sum of each merchants invoices' do
+    expect(@sales_analyst.all_invoices_by_merchant).to be_a Hash
+  end
+
+  it 'can determine the average invoices per merchant' do
+    expect(@sales_analyst.average_invoices_per_merchant).to eq 10.49
+  end
+
+  it 'can determine the average invoices per merchant' do
+    expect(@sales_analyst.average_invoices_per_merchant_standard_deviation).to eq 3.29
+  end
+
+  it 'can calcuate the top merchants (more than 2 standard deviations) and return an array' do
+    expect(@sales_analyst.top_merchants_by_invoice_count.first).to be_a Merchant
+    expect(@sales_analyst.top_merchants_by_invoice_count).to be_a Array
+  end
+
+  it 'can calcuate the top merchants (more than 2 standard deviations) and return an array' do
+    expect(@sales_analyst.bottom_merchants_by_invoice_count.first).to be_a Merchant
+    expect(@sales_analyst.bottom_merchants_by_invoice_count).to be_a Array
+  end
+
+  it 'can separate the invoices by days of the week' do
+    expect(@sales_analyst.day_total_invoices).to be_a Hash
+  end
+
+  it 'calculate invoice count by merchant' do
+    expect(@sales_analyst.invoice_count_per_merchant).to be_a Hash
+  end
+
+  it 'can return the date for the top DAYS for invoices more than 1 above standard deviation above the mean' do
+    expect(@sales_analyst.top_days_by_invoice_count).to be_a Array
+    expect(@sales_analyst.top_days_by_invoice_count.first).to be_a String
+  end
+
+  it 'can calculate the percentage of status in the argument' do
+    expect(@sales_analyst.invoice_status(:pending)).to eq(29.55)
+    expect(@sales_analyst.invoice_status(:shipped)).to eq(56.95)
+    expect(@sales_analyst.invoice_status(:returned)).to eq(13.5)
+  end
+
+  it 'can determine if an invoice is paid in full' do
+    expect(@sales_analyst.invoice_paid_in_full?(2179)).to be true
+  end
+
+  it 'can determine total revenue by invoice' do
+    expect(@sales_analyst.invoice_total(2179)).to be_a String
   end
 end

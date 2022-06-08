@@ -29,7 +29,7 @@ RSpec.describe InvoiceRepository do
 
     expect(@invoice.find_by_id(234234234)).to eq(nil)
     expect(@invoice.find_by_id(1)).to be_instance_of Invoice
-    expect(@invoice.find_by_id(1).status).to eq('pending')
+    expect(@invoice.find_by_id(1).status).to eq(:pending)
   end
 
   it 'can find all by customer id' do
@@ -50,7 +50,7 @@ RSpec.describe InvoiceRepository do
   it 'can find all by status' do
 
     expect(@invoice.find_all_by_status('doesnotexist')).to eq([])
-    expect(@invoice.find_all_by_status('pending')).to be_instance_of Array
+    expect(@invoice.find_all_by_status(:pending)).to be_instance_of Array
   end
 
   it 'can create new invoices' do
@@ -73,10 +73,10 @@ RSpec.describe InvoiceRepository do
 
     attributes = {status: 'shipped'}
 
-    expect(@invoice.all.first.status).to eq('pending')
+    expect(@invoice.all.first.status).to eq(:pending)
     @invoice.update(1, attributes)
 
-    expect(@invoice.all.first.status).to eq('shipped')
+    expect(@invoice.all.first.status).to eq(:shipped)
   end
 
   it 'can delete an invoice' do
