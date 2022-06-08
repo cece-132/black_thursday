@@ -49,7 +49,7 @@ class SalesAnalyst
 
   def average_item_price_for_merchant(id)
     items = @items_path.find_all_by_merchant_id(id)
-    items.sum { |item| item.unit_price } / BigDecimal(items.count, 2)
+    items.sum { |item| item.unit_price.to_i } / BigDecimal(items.count, 2)
     # items_with_same_merchant = @items_path.find_all_by_merchant_id(id)
     # sum = sum_of_of_item_price(id)
     # total_items = items_with_same_merchant.count
@@ -64,17 +64,17 @@ class SalesAnalyst
   end
 
   def average_average_price_per_merchant
-    all_prices = @items_path.all.collect { |item| item.unit_price }
+    all_prices = @items_path.all.collect { |item| item.unit_price.to_i }
     (all_prices.reduce(:+) / BigDecimal(@merchants_path.all.count, 2))
   end
 
   def average_item_price
-    all_prices = @items_path.all.collect { |item| item.unit_price }
+    all_prices = @items_path.all.collect { |item| item.unit_price.to_i }
     (all_prices.reduce(:+) / BigDecimal(@items_path.all.count)).round(2)
   end
 
   def price_difference_squared
-    all_prices = @items_path.all.collect { |item| item.unit_price }
+    all_prices = @items_path.all.collect { |item| item.unit_price.to_i }
     all_prices.map do |price|
       (price - average_item_price)**2
     end.sum
@@ -83,7 +83,7 @@ class SalesAnalyst
   def golden_items
     goal = average_item_price_standard_deviation + 2
     @items_path.all.find_all do |item|
-      item if item.unit_price > goal
+      item if item.unit_price.to_i > goal
     end
   end
 
