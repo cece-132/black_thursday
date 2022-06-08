@@ -56,6 +56,6 @@ RSpec.describe InvoiceItemRepository do
   end
 
   it 'can update invoice items' do
-
+    
   end
 end
