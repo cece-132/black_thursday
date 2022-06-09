@@ -1,5 +1,3 @@
-require 'pry'
-
 class Merchant
   attr_reader :id
   attr_accessor :name

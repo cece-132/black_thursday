@@ -1,7 +1,6 @@
 require_relative "sales_engine"
 require "BigDecimal"
 require 'date'
-require 'pry'
 
 class SalesAnalyst
   attr_reader :items_path, :merchants_path, :invoices_path, :transactions_path, :invoice_items
@@ -53,10 +52,6 @@ class SalesAnalyst
   def average_item_price_for_merchant(id)
     items = @items_path.find_all_by_merchant_id(id)
     items.sum { |item| item.unit_price.to_i } / BigDecimal(items.count, 2)
-    # items_with_same_merchant = @items_path.find_all_by_merchant_id(id)
-    # sum = sum_of_of_item_price(id)
-    # total_items = items_with_same_merchant.count
-    # average_price = sum / total_items
   end
 
   def sum_of_of_item_price(id)

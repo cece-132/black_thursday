@@ -17,22 +17,6 @@ class MerchantRepository
     end
   end
 
-#   def find_by_name(name)
-#     @all.find do |merchant|
-#       merchant.name.downcase == name.downcase
-#     end
-#   end
-
-  # def find_by_id(id)
-  #   @all.find do |merchant|
-  #     if merchant.id == id
-  #       return merchant
-  #     end
-  #   end
-  # end
-
-
-
   def find_all_by_name(name)
     @all.find_all do |merchant|
       merchant.name.downcase.include?(name.downcase)
@@ -56,11 +40,6 @@ class MerchantRepository
     merchant = find_by_id(id)
     merchant.name = attributes[:name] if merchant != nil
   end
-
-#   def delete(id)
-#     merchant = find_by_id(id)
-#     @all.delete(merchant)
-#   end
 
   def inspect
     "#<#{self.class} #{@sales_engine.merchants.all} rows>"

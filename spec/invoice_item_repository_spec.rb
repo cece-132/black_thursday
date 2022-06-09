@@ -11,6 +11,7 @@ RSpec.describe InvoiceItemRepository do
   end
 
   it 'exists' do
+
     expect(@sales_engine.invoice_items).to be_a InvoiceItemRepository
   end
 
@@ -55,7 +56,4 @@ RSpec.describe InvoiceItemRepository do
     expect(@sales_engine.invoice_items.all.last.id).to eq(21831)
   end
 
-  it 'can update invoice items' do
-    
-  end
 end

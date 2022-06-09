@@ -1,6 +1,5 @@
 require_relative '../lib/item_repository'
 require_relative '../lib/item'
-require 'pry'
 
 RSpec.describe ItemRepository do
   before :each do

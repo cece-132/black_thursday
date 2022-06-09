@@ -1,10 +1,7 @@
-require 'pry'
 require 'csv'
 require_relative 'invoice'
 require_relative 'transaction'
-
 require_relative 'repositable'
-
 
 class TransactionRepository
   include Repositable

@@ -21,7 +21,7 @@ RSpec.describe Transaction do
   it 'has an id' do
     expect(@t.id).to eq(6)
   end
-  #
+  
   it 'has an invoice id' do
     expect(@t.invoice_id).to eq(8)
   end
@@ -29,19 +29,19 @@ RSpec.describe Transaction do
   it 'has a credit card number' do
     expect(@t.credit_card_number).to eq('4242424242424242')
   end
-  #
+  
   it 'has a credit card expiration date' do
     expect(@t.credit_card_expiration_date).to eq('0220')
   end
-  #
+  
   it 'has a result' do
     expect(@t.result).to eq('success')
   end
-  #
+  
   it 'has created_at' do
     expect(@t.created_at).to be_a Time
   end
-  #
+  
   it 'has updated_at' do
     expect(@t.updated_at).to be_a Time
   end

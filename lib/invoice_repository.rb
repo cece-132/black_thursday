@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 require_relative 'invoice'
 require_relative 'merchant'
@@ -24,25 +23,11 @@ class InvoiceRepository
         end
   end
 
-  # def find_by_id(id)
-  #   @all.find do |invoice|
-  #     if invoice.id == id
-  #       return invoice
-  #     end
-  #   end
-  # end
-
   def find_all_by_customer_id(id)
     @all.find_all do |customer|
       customer.customer_id == id
     end
   end
-
-  # def find_all_by_merchant_id(merchant_id)
-  #   @all.find_all do |item|
-  #     item.merchant_id == merchant_id
-  #   end
-  # end
 
   def find_all_by_status(status)
     @all.find_all do |invoice|
@@ -72,10 +57,5 @@ class InvoiceRepository
   def inspect
     "#<#{self.class} #{@invoices.all} rows>"
   end
-
-  # def delete(id)
-  #   invoice = find_by_id(id)
-  #   @all.delete(invoice)
-  # end
 
 end

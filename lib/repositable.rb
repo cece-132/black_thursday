@@ -27,6 +27,4 @@ module Repositable
     end
   end
 
-  
-
 end

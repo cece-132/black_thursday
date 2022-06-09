@@ -90,7 +90,6 @@ RSpec.describe TransactionRepository do
     expect(@transaction.all.first.credit_card_expiration_date).to eq(1110)
   end
 
-  #
   it 'can delete a transaction' do
 
     expect(@transaction.all.count).to eq(4985)
